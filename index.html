@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Astrotag — Precision Vedic Astrology &amp; Kundali Platform</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23b84a14'/><path d='M14 6 A10 10 0 1 0 24 20 A8 8 0 1 1 14 6 Z' fill='%23fef08a'/><polygon points='18,10 19,13 22,14 19,15 18,18 17,15 14,14 17,13' fill='%23fff'/></svg>" />
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --primary: #b84a14;
+      --primary-dark: #8f360a;
+      --bg: #faf6f0;
+      --card: #ffffff;
+      --border: #e0d3c1;
+      --text: #2a1d15;
+      --text-muted: #6b5b4b;
+      --radius: 10px;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 14px 16px 40px;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 1280px;
+      margin: auto;
+    }
+    /* Astrotag Header */
+    .astrotag-navbar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 20px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(184, 74, 20, 0.05);
+    }
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-title {
+      font-size: 26px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #b84a14 0%, #d97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+    }
+    .brand-tagline {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .header-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .header-badge {
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .badge-gold {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+    .badge-live {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+    }
+
+    /* Global Location & Birth Details Form */
+    .form-card {
+      background: var(--card);
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+      align-items: end;
+    }
+    .field-group label {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 4px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #cbbba0;
+      border-radius: 7px;
+      font-size: 14px;
+      min-height: 43px;
+      background: #fff;
+      color: var(--text);
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(184, 74, 20, 0.12);
+    }
+    button {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: 0.2s;
+    }
+    button:hover {
+      opacity: 0.94;
+      transform: translateY(-1px);
+    }
+
+    /* Profile Banner */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      font-size: 13.5px;
+    }
+    .profile-item {
+      padding: 8px 10px;
+      background: #fffdfa;
+      border-radius: 6px;
+      border: 1px solid #f2e8dc;
+    }
+    .profile-item strong {
+      color: var(--primary);
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+    }
+
+    /* Navigation Tabs */
+    .nav-pages {
+      display: flex;
+      gap: 8px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+    }
+    .page-btn {
+      width: auto;
+      background: #efe6d8;
+      color: var(--text);
+      padding: 10px 18px;
+      border-radius: 24px;
+      font-size: 13.5px;
+      font-weight: 600;
+      white-space: nowrap;
+      min-height: 40px;
+    }
+    .page-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+    }
+    .page-section {
+      display: none;
+    }
+    .page-section.active {
+      display: block;
+    }
+
+    /* Charts */
+    .primary-charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+    .transit-charts-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .chart-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      text-align: center;
+    }
+    .chart-box h2 {
+      margin: 0 0 4px;
+      color: var(--primary);
+      font-size: 17px;
+    }
+    .chart-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin: 0 0 10px;
+    }
+    svg.kundali-svg {
+      width: 100%;
+      max-width: 410px;
+      height: auto;
+      background: #fffdf9;
+      user-select: none;
+      border-radius: 6px;
+    }
+    .house-poly {
+      fill: #fffdf9;
+      stroke: #b84a14;
+      stroke-width: 1.5;
+      cursor: pointer;
+      transition: fill 0.18s ease;
+    }
+    .house-poly:hover {
+      fill: #fdebd8;
+    }
+    .house-label-tag {
+      font-size: 9px;
+      fill: #9c826b;
+      pointer-events: none;
+    }
+    .legend-bar {
+      background: #fff8ee;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 20px;
+      font-size: 12.5px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+    .legend-bar span strong {
+      color: var(--primary);
+    }
+
+    /* Tables & Cards */
+    .table-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 22px;
+      overflow-x: auto;
+    }
+    .table-card h3 {
+      margin: 0 0 12px;
+      color: var(--primary);
+      font-size: 17px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      min-width: 580px;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee4d5;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f6efe4;
+      color: var(--text);
+      font-weight: 700;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-left: 4px;
+    }
+    .b-retro {
+      background: #fde8e8;
+      color: #b91c1c;
+    }
+    .b-combust {
+      background: #fef3c7;
+      color: #b45309;
+    }
+    .b-varg {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    /* Divisional Tabs */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .tab-btn {
+      width: auto;
+      background: #efe6d8;
+      color: var(--text);
+      padding: 7px 13px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      min-height: 36px;
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* 6-Level Horizontal Dasha */
+    .dasha-breadcrumb {
+      background: #fff8ee;
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 13.5px;
+    }
+    .dasha-columns-wrapper {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 14px;
+      align-items: flex-start;
+    }
+    .dasha-col {
+      min-width: 215px;
+      max-width: 235px;
+      background: #faf6f0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      flex-shrink: 0;
+    }
+    .dasha-col-header {
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 13px;
+      text-align: center;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+      text-transform: uppercase;
+    }
+    .dasha-node {
+      background: #fff;
+      border: 1px solid #e2d5c3;
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 12.5px;
+    }
+    .dasha-node:hover {
+      border-color: var(--primary);
+      background: #fff5eb;
+    }
+    .dasha-node.live-now {
+      border-left: 4px solid #16a34a;
+    }
+    .dasha-node.selected {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary-dark);
+    }
+    .dasha-node.selected .node-dates {
+      color: #fde8d7;
+    }
+    .live-pill {
+      background: #16a34a;
+      color: #fff;
+      font-size: 9px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 700;
+      margin-left: 6px;
+    }
+    .dasha-node.selected .live-pill {
+      background: #fff;
+      color: #15803d;
+    }
+    .node-title {
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .node-dates {
+      font-size: 11px;
+      color: #5c4b3c;
+      margin-top: 3px;
+    }
+
+    /* Page 4: Planets */
+    .section-toggle-btn {
+      width: 100%;
+      background: #fff8ee;
+      color: var(--primary);
+      border: 1px solid var(--border);
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    .planet-clean-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .planet-clean-card {
+      background: #fffdf9;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.18s;
+    }
+    .planet-clean-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(184, 74, 20, 0.15);
+      border-color: var(--primary);
+    }
+    .planet-clean-card .p-name {
+      margin-top: 8px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .anime-stage-card {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 24px;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .anime-frame {
+      background: linear-gradient(145deg, #fff8ee, #fdebd8);
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+    }
+    .speech-bubble {
+      background: #fff8ee;
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      font-style: italic;
+      color: #4a2c18;
+    }
+
+    @media (max-width: 1024px) {
+      .transit-charts-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 820px) {
+      .primary-charts, .anime-stage-card {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="astrotag-navbar">
+      <div class="brand-logo-wrap">
+        <svg width="44" height="44" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="21" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <path d="M21 10 C14 11 9 17 9 24 C9 32 16 38 25 38 C28.5 38 31.8 36.8 34.5 34.8 C24 35.5 16 27 16 17 C16 14.4 16.7 12 18 10 Z" fill="#f59e0b"/>
+          <circle cx="26" cy="22" r="8" fill="#b84a14"/>
+          <polygon points="26,17 27.5,20.5 31,22 27.5,23.5 26,27 24.5,23.5 21,22 24.5,20.5" fill="#ffffff"/>
+        </svg>
+        <div>
+          <div class="brand-title">Astrotag</div>
+          <div class="brand-tagline">Global Vedic Astrology, Transit &amp; Agentic AI Platform</div>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="header-badge badge-gold">✦ Worldwide Lat/Lon Engine</span>
+        <span class="header-badge badge-live">● Live Transit &amp; 6-Level Dasha</span>
+      </div>
+    </header>
+
+    <form id="kundaliForm" class="form-card">
+      <div class="form-grid">
+        <div class="field-group">
+          <label>Full Name *</label>
+          <input type="text" id="name" placeholder="Enter Full Name" required />
+        </div>
+        <div class="field-group">
+          <label>Date of Birth *</label>
+          <input type="date" id="dob" required />
+        </div>
+        <div class="field-group">
+          <label>Time of Birth *</label>
+          <input type="time" id="tob" required />
+        </div>
+        <div class="field-group">
+          <label>Country *</label>
+          <select id="countrySelect" required onchange="onCountryChange()"></select>
+        </div>
+        <div class="field-group">
+          <label>State / Province *</label>
+          <select id="stateSelect" required></select>
+        </div>
+        <div class="field-group">
+          <label>City or Village *</label>
+          <input type="text" id="cityInput" placeholder="e.g., Patna, Pune, London" required />
+        </div>
+        <div class="field-group">
+          <label>PIN / ZIP Code (Optional)</label>
+          <input type="text" id="pincodeInput" placeholder="e.g., 800001 or 10001" />
+        </div>
+        <div class="field-group">
+          <label>Ayanamsa System</label>
+          <select id="ayanamsaSelect">
+            <option value="lahiri" selected>Lahiri (Chitrapaksha)</option>
+            <option value="raman">B.V. Raman</option>
+            <option value="kp">Krishnamurti (KP)</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <button type="submit" id="submitBtn">Generate Kundali</button>
+        </div>
+      </div>
+    </form>
+
+    <div id="workspace" style="display:none;">
+      <div class="profile-grid" id="profileBanner"></div>
+
+      <div class="nav-pages">
+        <button class="page-btn active" onclick="switchPage('homePage', this)">1. Home (D1, D9 &amp; Planets)</button>
+        <button class="page-btn" onclick="switchPage('transitPage', this)">2. Transit (Delhi, Ascendant &amp; Moon)</button>
+        <button class="page-btn" onclick="switchPage('dashaPage', this)">3. Vimshottari Dasha (6 Levels)</button>
+        <button class="page-btn" id="planetsNavBtn" onclick="switchPage('planetsPage', this)">4. Planets (Classification &amp; Roles)</button>
+      </div>
+
+      <!-- PAGE 1: HOME -->
+      <div id="homePage" class="page-section active">
+        <div class="primary-charts">
+          <div class="chart-box">
+            <h2>D1 — Lagna (Rashi) Chart</h2>
+            <p class="chart-hint">Click any house for Planets, Nakshatra, Transit &amp; Sookshma Dasha analysis</p>
+            <div id="chart-D1"></div>
+          </div>
+          <div class="chart-box">
+            <h2>D9 — Navamsa Chart</h2>
+            <p class="chart-hint">Click any house to inspect D9 occupants, Nakshatras &amp; Dasha impact</p>
+            <div id="chart-D9"></div>
+          </div>
+        </div>
+
+        <div class="legend-bar">
+          <span><strong>House Corner:</strong> H1–H12 Compartment</span>
+          <span><strong>Center Number:</strong> Sign No. / [Nakshatra No.]</span>
+          <span><strong>Superscript (°):</strong> Degree</span>
+          <span><strong>* :</strong> Retrograde</span>
+          <span><strong>^ :</strong> Combust</span>
+          <span><strong># :</strong> Vargottama</span>
+        </div>
+
+        <div class="table-card">
+          <h3>Planetary Positions, Nakshatra &amp; Lordship Details (D1)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Planet</th>
+                <th>Sign &amp; Degree</th>
+                <th>Nakshatra (Pada)</th>
+                <th>House No.</th>
+                <th>Lord of House</th>
+                <th>Lord of Nakshatra</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="planetTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="chart-box" style="margin-bottom: 24px;">
+          <h2>Divisional Charts (Vargas)</h2>
+          <div class="tabs" id="vargaTabs" style="justify-content:center;"></div>
+          <h3 id="activeVargaTitle" style="color:#555; font-size:15px;"></h3>
+          <div id="chart-other"></div>
+        </div>
+
+        <div class="table-card">
+          <h3>AI Vedic Analyst (Agentic D1 + D9 + Sookshma Dasha Reader)</h3>
+          <div style="display:flex; gap:10px; margin-bottom:12px;">
+            <input type="text" id="aiQuestion" style="flex:1;" value="Analyze my Moon sign, running Sookshma Dasha, Yogakaraka, and D1/D9 charts." />
+            <button type="button" style="width:auto;" onclick="askAgent()">Ask AI Agent</button>
+          </div>
+          <div id="aiResponse" style="white-space:pre-wrap; line-height:1.6; background:#faf6f0; padding:14px; border-radius:6px; border:1px solid var(--border);">
+            Click "Ask AI Agent" for a full synthesis.
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE 2: TRANSIT -->
+      <div id="transitPage" class="page-section">
+        <div class="form-card">
+          <div class="form-grid">
+            <div class="field-group">
+              <label>Transit Date</label>
+              <input type="date" id="customTransitDate" />
+            </div>
+            <div class="field-group">
+              <label>Transit Time (IST)</label>
+              <input type="time" id="customTransitTime" />
+            </div>
+            <div class="field-group">
+              <button type="button" onclick="fetchCustomTransit()">Check Gochar for Selected Date</button>
+            </div>
+            <div class="field-group">
+              <button type="button" onclick="resetTransitToNow()" style="background:#15803d;">&#8634; Reset to Live Now</button>
+            </div>
+          </div>
+        </div>
+        <p id="transitTimestamp" style="font-size:14px; font-weight:600; color:#555; margin-top:0;"></p>
+        <div class="transit-charts-3">
+          <div class="chart-box">
+            <h2>1. Current Transit (New Delhi)</h2>
+            <p class="chart-hint" id="delhiAscHint">Live Gochar from New Delhi Lagna</p>
+            <div id="chart-transit-delhi"></div>
+          </div>
+          <div class="chart-box">
+            <h2>2. Transit from D1 Ascendant</h2>
+            <p class="chart-hint">Gochar placed in Birth Lagna Houses</p>
+            <div id="chart-transit-asc"></div>
+          </div>
+          <div class="chart-box">
+            <h2>3. Transit from Moon Sign</h2>
+            <p class="chart-hint">Gochar placed in Chandra Lagna Houses</p>
+            <div id="chart-transit-moon"></div>
+          </div>
+        </div>
+        <div class="table-card">
+          <h3>Current Transit Planetary Positions (New Delhi Reference)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Planet</th>
+                <th>Transit Sign &amp; Deg</th>
+                <th>Nakshatra</th>
+                <th>House (Delhi Lagna)</th>
+                <th>House Lord</th>
+              </tr>
+            </thead>
+            <tbody id="transitTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PAGE 3: 6-LEVEL VIMSHOTTARI DASHA -->
+      <div id="dashaPage" class="page-section">
+        <div class="table-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+            <h3 style="margin:0;">6-Level Vimshottari Dasha Explorer (Click Any Period to Expand Horizontally &rarr;)</h3>
+            <button type="button" onclick="resetDashaToToday()" style="width:auto; background:#15803d; padding:8px 16px;">&#8634; Reset to Today</button>
+          </div>
+          <div id="dashaBreadcrumb" class="dasha-breadcrumb">Active Now Path: Generating...</div>
+          <div id="dashaColumnsWrapper" class="dasha-columns-wrapper"></div>
+        </div>
+      </div>
+
+      <!-- PAGE 4: PLANETS -->
+      <div id="planetsPage" class="page-section">
+        <div class="table-card" style="padding:14px;">
+          <button type="button" class="section-toggle-btn" onclick="toggleParashariTable()">
+            <span>Parashari Planetary Classification</span>
+            <span id="parashariArrow">▼ Click to Expand / Collapse</span>
+          </button>
+          <div id="parashariTableWrapper" style="display:none; margin-top:16px; overflow-x:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Planet</th>
+                  <th>Houses Owned</th>
+                  <th>Karaka (Natural &amp; Chara)</th>
+                  <th>Yogakaraka</th>
+                  <th>Functional Benefic</th>
+                  <th>Badhaka Planet</th>
+                  <th>Maraka Planet</th>
+                </tr>
+              </thead>
+              <tbody id="planetClassificationBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <h3 style="font-size:19px; margin-bottom:6px;">Planets as per you</h3>
+          <div class="planet-clean-grid" id="planetGalleryGrid"></div>
+        </div>
+      </div>
+
+      <!-- SUB-PAGE 4B: 2D ANIME CHARACTER VIEW -->
+      <div id="planetRoleDetailPage" class="page-section">
+        <div style="margin-bottom:14px;">
+          <button type="button" onclick="backToPlanetsPage()" style="width:auto; background:#5c4b3c;">&larr; Back to Planets</button>
+        </div>
+        <div id="planetRoleDetailContent"></div>
+      </div>
+    </div>
+
+    <!-- EDITORIAL & KNOWLEDGE BASE (Required for Google AdSense & Educational Depth) -->
+    <div class="table-card" style="margin-top: 36px; padding: 26px 30px; line-height: 1.8;">
+      <h2 style="color: var(--primary); margin-top: 0; font-size: 22px; border-bottom: 2px solid var(--border); padding-bottom: 8px;">
+        Understanding Vedic Kundali: The Science of Planetary Geometries
+      </h2>
+      <p>
+        In classical Parashari Jyotish, a <strong>Janma Kundali</strong> (Birth Horoscope) is an exact mathematical snapshot of the celestial heavens captured at the precise moment of an individual's first breath. Unlike tropical astrology, which anchors itself to the changing seasons, Vedic astrology utilizes the <strong>Sidereal Zodiac (Nirayana)</strong>, which aligns planetary longitudes against the fixed background stars (Nakshatras) using precision ayanamsas such as <strong>Lahiri (Chitrapaksha)</strong>, <strong>B.V. Raman</strong>, and <strong>Krishnamurti (KP)</strong>.
+      </p>
+
+      <h3 style="color: var(--primary-dark); font-size: 18px; margin-top: 22px;">1. The 12 Houses (Bhavas) and Planetary Rulerships</h3>
+      <p>
+        The sky is partitioned into twelve distinct domains called <em>Bhavas</em>, radiating from the <strong>Lagna (Ascendant)</strong>—the zodiacal degree ascending on the eastern horizon at birth. The Lagna serves as the vital pivot of the entire chart, representing the physical constitution, vitality, and life direction. The 1st, 4th, 7th, and 10th houses constitute the <strong>Kendras</strong> (Pillars of Power), representing action, happiness, partnerships, and professional destiny. The 5th and 9th houses are the divine <strong>Trikonas</strong> (Trines of Fortune and Dharma), bringing grace and past-life merit (Purva Punya). Conversely, the 6th, 8th, and 12th houses—the <strong>Dusthanas</strong>—govern overcoming obstacles, transformation through crises, and spiritual liberation (Moksha).
+      </p>
+
+      <h3 style="color: var(--primary-dark); font-size: 18px; margin-top: 22px;">2. The Dual Lens: Rashi (D1) and Navamsha (D9) Charts</h3>
+      <p>
+        A foundational rule of Sage Parashara is that the primary <strong>Rashi (D1) chart</strong> portrays the physical manifestation of life events, while the <strong>Navamsha (D9) chart</strong> reveals the inner spiritual truth, soul direction, and marital destiny of the native. A planet that appears strong in the D1 chart but debilitated in the D9 chart (Neecha) often struggles to deliver sustainable success, whereas a planet weak in D1 that attains high dignity or exaltation in D9 (Uchha) experiences dramatic late-life elevation. When a planet occupies the exact same zodiac sign in both D1 and D9, it achieves <strong>Vargottama</strong> status, imbuing the native with unwavering resilience and fortitude in that planet's significations.
+      </p>
+
+      <h3 style="color: var(--primary-dark); font-size: 18px; margin-top: 22px;">3. Vimshottari Dasha: The Cosmic Timeline of Karmic Unfolding</h3>
+      <p>
+        Vedic astrology uniquely maps out the timing of life events through the 120-year cycle of the <strong>Vimshottari Dasha</strong> system, governed by the native's natal Moon Nakshatra. Each major period (<em>Mahadasha</em>) is governed by one of the nine celestial grahas, each triggering specific life chapters according to their natural significations and house ownerships. Astrotag expands this computational hierarchy down through six concentric levels: <strong>Mahadasha &rarr; Antardasha &rarr; Pratyantardasha &rarr; Sookshma Dasha &rarr; Pranadasha &rarr; Deha Dasha</strong>. This granular precision allows seekers and scholars to pinpoint exact dates when planetary yogas crystallize into tangible reality.
+      </p>
+
+      <h3 style="color: var(--primary-dark); font-size: 18px; margin-top: 22px;">4. Functional Nature of Grahas: Yogakaraka, Badhaka, and Maraka</h3>
+      <p>
+        Planets do not act merely as generic benefics or malefics; their functional impact changes dynamically based on the ascending Lagna sign. When a single planet simultaneously rules both a Kendra (action house) and a Trikona (fortune house)—such as Saturn for Taurus and Libra Lagnas, or Mars for Cancer and Leo Lagnas—it ascends to the status of a <strong>Yogakaraka</strong>, the supreme catalyst for worldly prestige and prosperity. Simultaneously, each rising sign possesses a <strong>Badhaka</strong> planet that introduces unexpected karmic hurdles, as well as <strong>Maraka</strong> lords (2nd and 7th houses) that oversee the culmination of vitality. Astrotag's algorithmic analysis calculates these roles automatically for every native.
+      </p>
+
+      <h3 style="color: var(--primary-dark); font-size: 18px; margin-top: 22px;">5. Real-Time Planetary Transits (Gochar) & Double Transit Law</h3>
+      <p>
+        While the natal birth chart records the permanent blueprint, live planetary transits (<em>Gochar</em>) serve as the celestial hands of the cosmic clock. Significant milestones—such as career promotions, marriages, or relocation—consistently require the <strong>Double Transit Law</strong>, where Jupiter (Guru) and Saturn (Shani) simultaneously aspect or transit key natal houses. By evaluating live Gochar from the Birth Lagna, Chandra Lagna (Moon sign), and current New Delhi coordinates, Astrotag provides a 360-degree synthesis of immediate celestial weather.
+      </p>
+    </div>
+
+    <!-- MANDATORY GOOGLE ADSENSE & COMPLIANCE FOOTER -->
+    <footer style="margin-top: 40px; padding: 24px 20px; text-align: center; font-size: 13.5px; color: var(--text-muted); border-top: 1px solid var(--border);">
+      <p style="margin-bottom: 8px;">
+        <a href="/about.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">About Us</a> &bull;
+        <a href="/privacy-policy.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Privacy Policy</a> &bull;
+        <a href="/disclaimer.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Astrology Disclaimer</a> &bull;
+        <a href="/contact.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Contact Us</a>
+      </p>
+      <p style="margin: 0; font-size: 12.5px; color: #8c7b6b;">
+        &copy; 2026 Astrotag. Precision Vedic Astrology Platform. All Rights Reserved.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    const RENDER_BACKEND_URL = "https://astrotag-api.onrender.com";
+    const host = window.location.hostname;
+
+    // On Vercel (*.vercel.app) or localhost, use same-origin /api/*.
+    // On Cloudflare Pages (astro.in, astrotag.in, *.pages.dev), route API calls to Render.
+    const API_BASE = (host.endsWith("vercel.app") || host === "localhost" || host === "127.0.0.1")
+      ? ""
+      : RENDER_BACKEND_URL;
+
+    function escapeHTML(str) {
+      return String(str ?? "").replace(/[&<>"']/g, m => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[m]));
+    }
+    const escapeHtml = escapeHTML;
+
+    let GLOBAL_KUNDALI_DATA = null;
+    let DASHA_PATH_LABELS = [];
+
+    // --- WORLD COUNTRY & STATE DROPDOWN INITIALIZATION ---
+    const INDIA_STATES = [
+      "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+      "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir",
+      "Jharkhand", "Karnataka", "Kerala", "Ladakh", "Madhya Pradesh", "Maharashtra",
+      "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Puducherry", "Punjab",
+      "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh",
+      "Uttarakhand", "West Bengal"
+    ];
+
+    function initGlobalCountries() {
+      const countrySelect = document.getElementById("countrySelect");
+      const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+      const isoCodes = [
+        "IN","US","GB","CA","AU","AE","SG","DE","FR","JP","NP","BD","LK","MY","SA","QA","KW","OM","BH",
+        "ZA","NZ","IE","NL","SE","CH","IT","ES","BR","MX","RU","CN","KR","ID","TH","VN","PH","PK"
+      ];
+      const countries = isoCodes.map(code => ({ code, name: regionNames.of(code) }))
+                                .sort((a, b) => a.name.localeCompare(b.name));
+      countrySelect.innerHTML = countries.map(c => 
+        `<option value="${c.name}" data-code="${c.code}" ${c.code === "IN" ? "selected" : ""}>${c.name}</option>`
+      ).join("");
+      onCountryChange();
+    }
+
+    async function onCountryChange() {
+      const countrySelect = document.getElementById("countrySelect");
+      const stateSelect = document.getElementById("stateSelect");
+      const selectedCountry = countrySelect.value;
+      if (selectedCountry === "India") {
+        stateSelect.innerHTML = INDIA_STATES.map(s => 
+          `<option value="${s}" ${s === "Maharashtra" ? "selected" : ""}>${s}</option>`
+        ).join("");
+        return;
+      }
+      stateSelect.innerHTML = `<option value="">Loading states...</option>`;
+      try {
+        const res = await fetch("https://countriesnow.space/api/v0.1/countries/states", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ country: selectedCountry })
+        });
+        const json = await res.json();
+        const states = (json.data && json.data.states) ? json.data.states.map(s => s.name) : [];
+        if (states.length > 0) {
+          stateSelect.innerHTML = states.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join("");
+        } else {
+          stateSelect.innerHTML = `<option value="${escapeHtml(selectedCountry)}">${escapeHtml(selectedCountry)} (Main Region)</option>`;
+        }
+      } catch (e) {
+        stateSelect.innerHTML = `<option value="${escapeHtml(selectedCountry)}">${escapeHtml(selectedCountry)}</option>`;
+      }
+    }
+
+    initGlobalCountries();
+
+    const HOUSE_GEOMETRY = {
+      1:  { poly: "200,2 300,100 200,200 100,100",  hTag: [200, 26],  sign: [200, 178], planets: [200, 105] },
+      2:  { poly: "2,2 200,2 100,100",               hTag: [100, 16],  sign: [100, 84],  planets: [100, 46] },
+      3:  { poly: "2,2 100,100 2,200",               hTag: [16, 105],  sign: [76, 105],  planets: [42, 105] },
+      4:  { poly: "100,100 200,200 100,300 2,200",   hTag: [24, 205],  sign: [170, 205], planets: [102, 205] },
+      5:  { poly: "2,200 100,300 2,398",             hTag: [16, 305],  sign: [76, 305],  planets: [42, 305] },
+      6:  { poly: "100,300 200,398 2,398",           hTag: [100, 390], sign: [100, 326], planets: [100, 364] },
+      7:  { poly: "200,200 300,300 200,398 100,300", hTag: [200, 386], sign: [200, 232], planets: [200, 302] },
+      8:  { poly: "300,300 398,398 200,398",         hTag: [300, 390], sign: [300, 326], planets: [300, 364] },
+      9:  { poly: "398,200 398,398 300,300",         hTag: [382, 305], sign: [324, 305], planets: [358, 305] },
+      10: { poly: "300,100 398,200 300,300 200,200", hTag: [376, 205], sign: [230, 205], planets: [298, 205] },
+      11: { poly: "398,2 398,200 300,100",           hTag: [382, 105], sign: [324, 105], planets: [358, 105] },
+      12: { poly: "200,2 398,2 300,100",             hTag: [300, 16],  sign: [300, 84],  planets: [300, 46] }
+    };
+
+    function toggleParashariTable() {
+      const w = document.getElementById("parashariTableWrapper");
+      const arrow = document.getElementById("parashariArrow");
+      const isHidden = (w.style.display === "none" || w.style.display === "");
+      w.style.display = isHidden ? "block" : "none";
+      arrow.textContent = isHidden ? "▲ Click to Collapse" : "▼ Click to Expand / Collapse";
+    }
+
+    function setDefaultTransitInputs() {
+      const now = new Date();
+      document.getElementById("customTransitDate").value = now.toISOString().split("T")[0];
+      document.getElementById("customTransitTime").value = String(now.getHours()).padStart(2, '0') + ":" + String(now.getMinutes()).padStart(2, '0');
+    }
+
+    function renderTransitSection(transit) {
+      document.getElementById("transitTimestamp").textContent = `Live Gochar Snapshot: ${transit.timestamp} | Reference Coordinates: New Delhi, India`;
+      document.getElementById("delhiAscHint").textContent = `Rising Sign: ${transit.delhi_asc}`;
+      document.getElementById("chart-transit-delhi").innerHTML = renderNorthIndianSVG(transit.delhi_chart, "TRANSIT_DELHI");
+      document.getElementById("chart-transit-asc").innerHTML = renderNorthIndianSVG(transit.asc_chart, "TRANSIT_ASC");
+      document.getElementById("chart-transit-moon").innerHTML = renderNorthIndianSVG(transit.moon_chart, "TRANSIT_MOON");
+
+      document.getElementById("transitTableBody").innerHTML = transit.table.map(t => `
+        <tr>
+          <td><strong>${escapeHtml(t.planet)}</strong> ${t.is_retrograde ? "*" : ""}</td>
+          <td>${escapeHtml(t.sign_name)} ${escapeHtml(t.degree)}°</td>
+          <td>${escapeHtml(t.nakshatra)}</td>
+          <td>House ${escapeHtml(t.house)}</td>
+          <td>${escapeHtml(t.house_lord)}</td>
+        </tr>
+      `).join("");
+    }
+
+    async function fetchCustomTransit() {
+      if (!GLOBAL_KUNDALI_DATA) return;
+      const tDate = document.getElementById("customTransitDate").value;
+      const tTime = document.getElementById("customTransitTime").value;
+
+      const res = await fetch(`${API_BASE}/api/transit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          natal_meta: GLOBAL_KUNDALI_DATA.natal_meta,
+          transit_date: tDate,
+          transit_time: tTime
+        })
+      });
+      if (res.ok) {
+        const transitData = await res.json();
+        Object.assign(GLOBAL_KUNDALI_DATA.chart_insights, transitData.insights);
+        renderTransitSection(transitData);
+      }
+    }
+
+    function resetTransitToNow() {
+      if (!GLOBAL_KUNDALI_DATA) return;
+      setDefaultTransitInputs();
+      renderTransitSection(GLOBAL_KUNDALI_DATA.transit);
+    }
+
+    function getAnimePlanetCharacterSVG(planetName, size = 135) {
+      const characters = {
+        Sun: {
+          quote: "I am your Inner Sun and Sovereign Light. Stand tall with royal dignity and own your authority.",
+          bg: "#fff7ed", halo: "#f59e0b", hair: "#ea580c", robe: "#c2410c", eye: "#b45309", accent: "#eab308"
+        },
+        Moon: {
+          quote: "I rule your emotional tides, peace of mind, and motherly intuition.",
+          bg: "#f0f9ff", halo: "#38bdf8", hair: "#94a3b8", robe: "#0284c7", eye: "#0369a1", accent: "#e0f2fe"
+        },
+        Mars: {
+          quote: "I am your Warrior Spirit, stamina, and courage! Charge forward and turn obstacles into victories.",
+          bg: "#fef2f2", halo: "#ef4444", hair: "#dc2626", robe: "#991b1b", eye: "#b91c1c", accent: "#f59e0b"
+        },
+        Mercury: {
+          quote: "I am your Clever Intellect, wit, and analytical mind. Master new strategies and communicate clearly.",
+          bg: "#ecfdf5", halo: "#10b981", hair: "#059669", robe: "#047857", eye: "#065f46", accent: "#a7f3d0"
+        },
+        Jupiter: {
+          quote: "I shower you with Divine Wisdom, dharma, and expansive abundance.",
+          bg: "#fefce8", halo: "#eab308", hair: "#d97706", robe: "#b45309", eye: "#854d0e", accent: "#facc15"
+        },
+        Venus: {
+          quote: "I bring Beauty, Devotion, and Creative Grace into your relationships and comforts.",
+          bg: "#fdf2f8", halo: "#ec4899", hair: "#db2777", robe: "#be185d", eye: "#9d174d", accent: "#fbcfe8"
+        },
+        Saturn: {
+          quote: "I am Time, Karma, and Unyielding Discipline. Patience and hard work build lasting mastery.",
+          bg: "#f8fafc", halo: "#475569", hair: "#334155", robe: "#1e293b", eye: "#0f172a", accent: "#64748b"
+        },
+        Rahu: {
+          quote: "I am the Visionary Maverick—pushing you toward bold ambition and foreign horizons!",
+          bg: "#faf5ff", halo: "#a855f7", hair: "#6b21a8", robe: "#3b0764", eye: "#7e22ce", accent: "#c084fc"
+        },
+        Ketu: {
+          quote: "I am the Mystic Monk of Liberation—awakening deep intuition and spiritual insight.",
+          bg: "#fafaf9", halo: "#78716c", hair: "#57534e", robe: "#292524", eye: "#44403c", accent: "#a8a29e"
+        }
+      };
+      const c = characters[planetName] || characters.Sun;
+      const svg = `
+        <svg width="${size}" height="${size}" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" style="border-radius:14px; background:${c.bg}; border:1px solid #e0d3c1;">
+          <circle cx="70" cy="70" r="54" fill="${c.halo}" opacity="0.22"/>
+          <path d="M30 136 C34 106 50 96 70 96 C90 96 106 106 110 136 Z" fill="${c.robe}"/>
+          <path d="M60 96 L70 115 L80 96 Z" fill="${c.accent}" opacity="0.85"/>
+          <rect x="63" y="82" width="14" height="16" rx="3" fill="#fed7aa"/>
+          <path d="M48 64 C48 46 92 46 92 64 C92 84 82 92 70 92 C58 92 48 84 48 64 Z" fill="#ffedd5"/>
+          <path d="M44 54 C46 34 60 34 70 34 C80 34 94 34 96 54 C90 46 80 45 70 46 C60 45 50 46 44 54 Z" fill="${c.hair}"/>
+          <ellipse cx="58" cy="67" rx="5" ry="7.5" fill="#ffffff"/>
+          <ellipse cx="82" cy="67" rx="5" ry="7.5" fill="#ffffff"/>
+          <ellipse cx="58" cy="67" rx="3.5" ry="5.5" fill="${c.eye}"/>
+          <ellipse cx="82" cy="67" rx="3.5" ry="5.5" fill="${c.eye}"/>
+          <circle cx="56.5" cy="64.5" r="1.7" fill="#ffffff"/>
+          <circle cx="80.5" cy="64.5" r="1.7" fill="#ffffff"/>
+          <path d="M66 80 Q70 83 74 80" stroke="#b45309" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      `;
+      return { svg, quote: c.quote };
+    }
+
+    function switchPage(pageId, btn) {
+      document.querySelectorAll(".page-section").forEach(p => p.classList.remove("active"));
+      document.querySelectorAll(".page-btn").forEach(b => b.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+      if (btn) btn.classList.add("active");
+    }
+
+    function openPlanetRolePage(planetName) {
+      if (!GLOBAL_KUNDALI_DATA) return;
+      const pItem = GLOBAL_KUNDALI_DATA.planet_classifications.find(x => x.planet === planetName);
+      if (!pItem) return;
+
+      document.querySelectorAll(".page-section").forEach(p => p.classList.remove("active"));
+      document.getElementById("planetRoleDetailPage").classList.add("active");
+
+      const anime = getAnimePlanetCharacterSVG(pItem.planet, 220);
+      const statusBadge = pItem.is_dasha_active 
+        ? `<span style="background:#16a34a; color:#fff; padding:5px 12px; border-radius:6px; font-size:12px; font-weight:bold;">${escapeHtml(pItem.dasha_status)}</span>`
+        : `<span style="background:#efe6d8; color:#5c4b3c; padding:5px 12px; border-radius:6px; font-size:12px; font-weight:bold;">${escapeHtml(pItem.dasha_status)}</span>`;
+
+      document.getElementById("planetRoleDetailContent").innerHTML = `
+        <div class="anime-stage-card">
+          <div class="anime-frame">
+            ${anime.svg}
+            <h2 style="margin:12px 0 4px; color:#b84a14;">${escapeHtml(pItem.planet)} (${escapeHtml(pItem.short)})</h2>
+            <div style="font-size:13px; color:#666; margin-bottom:10px;">${escapeHtml(pItem.house_and_nak)}</div>
+            <div>${statusBadge}</div>
+          </div>
+          <div>
+            <div class="speech-bubble"><strong>"${escapeHtml(pItem.planet)} speaks:"</strong><br/>&ldquo;${escapeHtml(anime.quote)}&rdquo;</div>
+            <h2 style="margin:0 0 8px;">Planets as per you: ${escapeHtml(pItem.archetype_title)}</h2>
+            <p style="font-size:14.5px; margin:0 0 10px;"><strong>Human Representation:</strong> ${escapeHtml(pItem.human_role)}</p>
+            <p style="font-size:14.5px; margin:0 0 10px;"><strong>Life Manifestation:</strong> ${escapeHtml(pItem.life_manifestation)}</p>
+            <div style="background:#faf6f0; border:1px solid #e0d3c1; border-radius:8px; padding:14px; font-size:14px;">
+              <strong>Your Chart &amp; Current Dasha Synthesis:</strong><br/>${escapeHtml(pItem.personalized_note)}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function backToPlanetsPage() {
+      switchPage("planetsPage", document.getElementById("planetsNavBtn"));
+    }
+
+    function renderNorthIndianSVG(houseData, chartKey) {
+      let svgParts = "";
+      for (let h = 1; h <= 12; h++) {
+        const info = houseData[h];
+        const geo = HOUSE_GEOMETRY[h];
+        svgParts += `<polygon class="house-poly" points="${geo.poly}" onclick="openHouseWindow(${h}, '${chartKey}')"><title>Click to inspect ${chartKey} House ${h} (${info.sign_name})</title></polygon>`;
+        svgParts += `<text x="${geo.hTag[0]}" y="${geo.hTag[1]}" class="house-label-tag" text-anchor="middle">H${h}</text>`;
+        svgParts += `<text x="${geo.sign[0]}" y="${geo.sign[1]}" font-size="12" font-weight="bold" fill="#b84a14" text-anchor="middle" style="pointer-events:none;">${info.sign_num}<tspan font-size="10" fill="#6b5b4b">[${info.nak_num}]</tspan></text>`;
+
+        if (info.planets.length > 0) {
+          let tspans = info.planets.map(p => {
+            const flags = `${p.retro}${p.combust}${p.vargottama}`;
+            return `${p.short}<tspan baseline-shift="super" font-size="9" fill="#555">${p.deg}</tspan><tspan fill="#b91c1c" font-weight="bold">${flags}</tspan>`;
+          }).join(" ");
+          svgParts += `<text x="${geo.planets[0]}" y="${geo.planets[1]}" font-size="12" font-weight="600" fill="#1a1a1a" text-anchor="middle" style="pointer-events:none;">${tspans}</text>`;
+        }
+      }
+      return `<svg class="kundali-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">${svgParts}<rect x="2" y="2" width="396" height="396" fill="none" stroke="#b84a14" stroke-width="2.5" style="pointer-events:none;"/></svg>`;
+    }
+
+    function openHouseWindow(houseNum, chartKey) {
+      if (!GLOBAL_KUNDALI_DATA) return;
+      const chartInsights = GLOBAL_KUNDALI_DATA.chart_insights[chartKey] || GLOBAL_KUNDALI_DATA.chart_insights["D1"];
+      const insight = chartInsights[houseNum];
+
+      const popup = window.open("", `House_${chartKey}_${houseNum}`, "width=680,height=760,scrollbars=yes,resizable=yes");
+      if (!popup) return alert("Please allow pop-ups in your browser.");
+      try { popup.opener = null; } catch (e) {}
+
+      const occHtml = insight.occupant_details.length ? insight.occupant_details.map(o => `<li>${escapeHtml(o)}</li>`).join("") : "<li>Empty House</li>";
+      const aspHtml = insight.aspects.length ? insight.aspects.map(a => `<li><strong>${escapeHtml(a.planet)}</strong> from House ${escapeHtml(a.from_house)} (${escapeHtml(a.aspect_type)}) — <em>Nak: ${escapeHtml(a.nakshatra)} (Lord: ${escapeHtml(a.nakshatra_lord)}) | ${escapeHtml(a.dignity)}: ${escapeHtml(a.reason)}</em></li>`).join("") : "<li>No planetary aspects on this house.</li>";
+      const dashaHtml = insight.dasha_breakdown.map(line => `<li>${escapeHtml(line)}</li>`).join("");
+      const goodHtml = insight.good_planets.length ? insight.good_planets.map(g => `<li style="color:#15803d;">✔ ${escapeHtml(g)}</li>`).join("") : "<li>None</li>";
+      const weakHtml = insight.weak_planets.length ? insight.weak_planets.map(w => `<li style="color:#b91c1c;">✖ ${escapeHtml(w)}</li>`).join("") : "<li>None</li>";
+
+      const safeGreenPct = Math.max(0, Math.min(100, Number(insight.green_pct) || 0));
+      const safeRedPct = Math.max(0, Math.min(100, Number(insight.red_pct) || 0));
+
+      popup.document.write(`
+        <!DOCTYPE html><html><head><title>${escapeHtml(chartKey)} House ${escapeHtml(houseNum)}</title>
+        <style>
+          body { font-family: system-ui, sans-serif; background: #faf6f0; color: #2a1d15; padding: 20px; }
+          .card { background: #fff; border: 1px solid #e0d3c1; border-radius: 8px; padding: 16px; margin-bottom: 14px; }
+          h2 { margin: 0 0 6px; color: #b84a14; }
+          h3 { margin: 0 0 10px; color: #8f360a; border-bottom: 1px solid #eee4d5; padding-bottom: 6px; }
+          .meter { display: flex; height: 30px; border-radius: 6px; overflow: hidden; margin: 10px 0; font-weight: bold; font-size: 13px; color: #fff; }
+          .g-bar { background: #16a34a; display: flex; align-items: center; justify-content: center; }
+          .r-bar { background: #dc2626; display: flex; align-items: center; justify-content: center; }
+          .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        </style></head><body>
+          <div class="card">
+            <h2>${escapeHtml(chartKey)} — House ${escapeHtml(houseNum)}: ${escapeHtml(insight.sign_name)} (Sign #${escapeHtml(insight.sign_num)})</h2>
+            <p><strong>House Lord:</strong> ${escapeHtml(insight.house_lord)} [${escapeHtml(insight.lord_nakshatra)}]</p>
+          </div>
+          <div class="card">
+            <h3>Current Dasha Result (Up to Sookshma Dasha): ${escapeHtml(insight.active_dasha_4)}</h3>
+            <div class="meter">
+              <div class="g-bar" style="width:${safeGreenPct}%;">Good: ${safeGreenPct}%</div>
+              <div class="r-bar" style="width:${safeRedPct}%;">Challenging: ${safeRedPct}%</div>
+            </div>
+            <ul>${dashaHtml}</ul>
+          </div>
+          <div class="card"><h3>Occupying Planets &amp; Nakshatras</h3><ul>${occHtml}</ul></div>
+          <div class="card"><h3>Aspecting Planets (Drishti)</h3><ul>${aspHtml}</ul></div>
+          <div class="grid-2">
+            <div class="card"><h3 style="color:#15803d;">Strong / Good</h3><ul>${goodHtml}</ul></div>
+            <div class="card"><h3 style="color:#b91c1c;">Weak / Afflicted</h3><ul>${weakHtml}</ul></div>
+          </div>
+        </body></html>
+      `);
+      popup.document.close();
+    }
+
+    function initHorizontalDasha(mahadashas, activeChain) {
+      const wrapper = document.getElementById("dashaColumnsWrapper");
+      wrapper.innerHTML = "";
+      DASHA_PATH_LABELS = [];
+
+      if (activeChain && activeChain.length === 6) {
+        activeChain.forEach(c => renderDashaColumn(c.level, `${c.level}. ${c.level_name}`, c.periods, true));
+        document.getElementById("dashaBreadcrumb").textContent = "Active Now Path: " + DASHA_PATH_LABELS.join(" → ");
+      } else {
+        renderDashaColumn(1, "1. Mahadasha", mahadashas, false);
+      }
+    }
+
+    function resetDashaToToday() {
+      if (!GLOBAL_KUNDALI_DATA) return;
+      initHorizontalDasha(GLOBAL_KUNDALI_DATA.dasha, GLOBAL_KUNDALI_DATA.active_dasha_chain);
+    }
+
+    function renderDashaColumn(level, title, periods, autoSelectActive = false) {
+      const wrapper = document.getElementById("dashaColumnsWrapper");
+      document.querySelectorAll(".dasha-col").forEach(col => {
+        if (parseInt(col.dataset.level, 10) >= level) col.remove();
+      });
+
+      const col = document.createElement("div");
+      col.className = "dasha-col";
+      col.dataset.level = level;
+      col.innerHTML = `<div class="dasha-col-header">${escapeHtml(title)}</div>`;
+
+      periods.forEach(p => {
+        const card = document.createElement("div");
+        const isLive = Boolean(p.is_active_now);
+        card.className = "dasha-node" + (isLive ? " live-now" : "");
+        if (autoSelectActive && isLive) {
+          card.classList.add("selected");
+          DASHA_PATH_LABELS.push(`${p.lord} (${p.level_name})`);
+        }
+        card.innerHTML = `<div class="node-title"><span>${escapeHtml(p.lord)}${isLive ? '<span class="live-pill">NOW</span>' : ''}</span><span>${p.has_children ? '→' : ''}</span></div><div class="node-dates">${escapeHtml(p.start)}<br/>to ${escapeHtml(p.end)}</div>`;
+
+        card.onclick = async () => {
+          col.querySelectorAll(".dasha-node").forEach(n => n.classList.remove("selected"));
+          card.classList.add("selected");
+
+          DASHA_PATH_LABELS = DASHA_PATH_LABELS.slice(0, level - 1);
+          DASHA_PATH_LABELS.push(`${p.lord} (${p.level_name})`);
+          document.getElementById("dashaBreadcrumb").textContent = "Selected Path: " + DASHA_PATH_LABELS.join(" → ");
+
+          if (!p.has_children) return;
+
+          if (level === 1 && p.antardashas) {
+            renderDashaColumn(2, "2. Antardasha", p.antardashas, false);
+          } else {
+            const res = await fetch(`${API_BASE}/api/dasha-sublevels`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                parent_lord: p.lord,
+                start_iso: p.start_iso,
+                end_iso: p.end_iso,
+                level
+              })
+            });
+            if (res.ok) {
+              const nextData = await res.json();
+              renderDashaColumn(nextData.level, `${nextData.level}. ${nextData.level_name}`, nextData.periods, false);
+              wrapper.scrollTo({ left: wrapper.scrollWidth, behavior: "smooth" });
+            }
+          }
+        };
+        col.appendChild(card);
+      });
+      wrapper.appendChild(col);
+    }
+
+    document.getElementById("kundaliForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("submitBtn");
+      btn.textContent = "Calculating...";
+      btn.disabled = true;
+
+      const countryOpt = document.getElementById("countrySelect").selectedOptions[0];
+      const payload = {
+        name: document.getElementById("name").value,
+        dob: document.getElementById("dob").value,
+        tob: document.getElementById("tob").value,
+        country: document.getElementById("countrySelect").value,
+        country_code: countryOpt ? countryOpt.dataset.code : "",
+        state: document.getElementById("stateSelect").value,
+        city: document.getElementById("cityInput").value,
+        pincode: document.getElementById("pincodeInput").value,
+        ayanamsa: document.getElementById("ayanamsaSelect").value
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/api/kundali`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({ detail: "Server Error" }));
+          alert(`Error (${res.status}): ${err.detail}`);
+          return;
+        }
+        const data = await res.json();
+        GLOBAL_KUNDALI_DATA = data;
+
+        document.getElementById("workspace").style.display = "block";
+        document.getElementById("profileBanner").innerHTML = `
+          <div class="profile-item"><strong>Native &amp; Birth</strong>${escapeHtml(data.profile.name)} (${escapeHtml(data.profile.dob)} at ${escapeHtml(data.profile.tob)})</div>
+          <div class="profile-item"><strong>Location &amp; Coordinates</strong>${escapeHtml(data.profile.place)}<br/><small>${escapeHtml(data.profile.coords)}</small></div>
+          <div class="profile-item"><strong>Ascendant &amp; Moon Sign</strong>Lagna: ${escapeHtml(data.profile.ascendant)}<br/>Moon: ${escapeHtml(data.profile.moon_sign)}</div>
+          <div class="profile-item"><strong>Running Dasha &amp; Ayanamsa</strong>${escapeHtml(data.profile.running_dasha)}<br/><small>Ayanamsa: ${escapeHtml(data.profile.ayanamsa || "Lahiri")}</small></div>
+        `;
+
+        document.getElementById("chart-D1").innerHTML = renderNorthIndianSVG(data.charts.D1, "D1");
+        document.getElementById("chart-D9").innerHTML = renderNorthIndianSVG(data.charts.D9, "D9");
+
+        document.getElementById("planetTableBody").innerHTML = data.planet_table.map(p => {
+          let badges = "";
+          if (p.is_ascendant) badges += `<span class="badge" style="background:#fef3c7; color:#b45309;">Lagna</span>`;
+          if (p.is_retrograde) badges += `<span class="badge b-retro">* Retrograde</span>`;
+          if (p.is_combust) badges += `<span class="badge b-combust">^ Combust</span>`;
+          if (p.is_vargottama) badges += `<span class="badge b-varg"># Vargottama</span>`;
+          const rowStyle = p.is_ascendant ? 'style="background:#fff8ee; font-weight:600;"' : "";
+          return `
+            <tr ${rowStyle}>
+              <td><strong>${escapeHtml(p.planet)}</strong> (${escapeHtml(p.short)})</td>
+              <td>${escapeHtml(p.sign_name)} ${escapeHtml(p.degree)}°</td>
+              <td>${escapeHtml(p.nakshatra)} [#${escapeHtml(p.nakshatra_num)}]</td>
+              <td>House ${escapeHtml(p.house)}</td>
+              <td>${escapeHtml(p.house_lord)}</td>
+              <td>${escapeHtml(p.nakshatra_lord)}</td>
+              <td>${badges || "Normal"}</td>
+            </tr>
+          `;
+        }).join("");
+
+        const tabsDiv = document.getElementById("vargaTabs");
+        tabsDiv.innerHTML = "";
+        Object.keys(data.charts).filter(k => k !== "D1" && k !== "D9").forEach((key, idx) => {
+          const b = document.createElement("button");
+          b.className = "tab-btn" + (idx === 0 ? " active" : "");
+          b.textContent = key;
+          b.onclick = () => {
+            document.querySelectorAll(".tab-btn").forEach(x => x.classList.remove("active"));
+            b.classList.add("active");
+            document.getElementById("activeVargaTitle").textContent = `${key} Divisional Chart`;
+            document.getElementById("chart-other").innerHTML = renderNorthIndianSVG(data.charts[key], key);
+          };
+          tabsDiv.appendChild(b);
+          if (idx === 0) b.click();
+        });
+
+        setDefaultTransitInputs();
+        renderTransitSection(data.transit);
+        initHorizontalDasha(data.dasha, data.active_dasha_chain);
+
+        document.getElementById("planetClassificationBody").innerHTML = data.planet_classifications.map(c => `
+          <tr><td><strong>${escapeHtml(c.planet)}</strong> (${escapeHtml(c.short)})</td><td>${escapeHtml(c.owned_houses)}</td><td>${escapeHtml(c.karaka)}</td><td><strong>${escapeHtml(c.yogakaraka)}</strong></td><td>${escapeHtml(c.functional_benefic)}</td><td>${escapeHtml(c.badhaka)}</td><td>${escapeHtml(c.maraka)}</td></tr>
+        `).join("");
+
+        document.getElementById("planetGalleryGrid").innerHTML = data.planet_classifications.map(c => {
+          const anime = getAnimePlanetCharacterSVG(c.planet, 135);
+          return `<div class="planet-clean-card" onclick="openPlanetRolePage('${c.planet}')">${anime.svg}<div class="p-name">${c.planet}</div></div>`;
+        }).join("");
+
+      } finally {
+        btn.textContent = "Generate Kundali";
+        btn.disabled = false;
+      }
+    });
+
+    async function askAgent() {
+      if (!GLOBAL_KUNDALI_DATA) return;
+      const question = document.getElementById("aiQuestion").value;
+      const box = document.getElementById("aiResponse");
+      box.textContent = "AI Agent is analyzing Moon Sign, Sookshma Dasha, Yogakaraka, and D1/D9...";
+
+      const res = await fetch(`${API_BASE}/api/ask-astrologer`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question,
+          context_data: {
+            profile: GLOBAL_KUNDALI_DATA.profile,
+            planet_classifications: GLOBAL_KUNDALI_DATA.planet_classifications,
+            chart_insights: GLOBAL_KUNDALI_DATA.chart_insights
+          }
+        })
+      });
+      const data = await res.json();
+      box.textContent = res.ok ? data.analysis : "Error: " + (data.detail || "Failed");
+    }
+  </script>
+</body>
+</html>
